@@ -8,4 +8,7 @@ router.post('/post/create', (req, res) => {
     res.send('Submitted')
 })
 
+router.get('/roomCost', async (req, res) => {
+    
+})
 module.exports = router

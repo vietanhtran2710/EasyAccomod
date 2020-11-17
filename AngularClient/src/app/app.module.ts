@@ -11,19 +11,25 @@ import { AccountComponent } from './admin/verify/accounts/accounts.component';
 import { PostsComponent } from './admin/verify/posts/posts.component';
 import { NavbarComponent } from './admin/navbar/navbar.component';
 import { HomeComponent } from './admin/home/home.component';
-import { LogInComponent } from './log-in/log-in.component';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { CommentsComponent } from './admin/verify/comments/comments.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
+import { LogInComponent } from './log-in/log-in.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
     AccountComponent,
-    PostsComponent,
     NavbarComponent,
     HomeComponent,
+    PostsComponent,
+    CreatePostComponent,
+    PostDetailsComponent,
+    CommentsComponent,
     LogInComponent,
-    CreatePostComponent
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

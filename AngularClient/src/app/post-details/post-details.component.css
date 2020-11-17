@@ -1,0 +1,30 @@
+.full-img {
+    position: relative;
+    display: block;
+    
+}
+
+.thumbar-img img {
+    position: absolute;
+    display: block;
+    width: 20%;
+    float: left;
+    cursor: pointer;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: auto;
+}
+.preview {
+    grid-column: 1;
+}
+
+.info {
+    grid-column: 2;
+}
+
+.thumb-bar img {
+    width: 100px;
+}

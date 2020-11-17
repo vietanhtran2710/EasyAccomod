@@ -12,6 +12,11 @@ export class CreatePostComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  postDurationCost = {
+    weekCost: 5,
+    monthCost: 20,
+    yearCost: 100,
+  }
   roomImages = [] // mảng lưu các file ảnh của phòng trọ (Blob)
   imgUrls = []
   displayImage(files) {
@@ -22,7 +27,7 @@ export class CreatePostComponent implements OnInit {
 
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.imgUrls.push(event.target.result)
-        this.roomModel.patchValue({
+        this.postModel.patchValue({
           images: this.roomImages // thêm ảnh vào model để tạo FormData
         })
       }
@@ -30,11 +35,12 @@ export class CreatePostComponent implements OnInit {
   }
 
   // Object thể hiện các thông tin trong form 
-  roomModel = this.fb.group({
+  postModel = this.fb.group({
     owner: this.fb.group({
       name: ['Dinh Trong Hieu'],
       phoneNumber: ['0927146476'],
     }),
+    postName: ['', [Validators.required]],
     address: this.fb.group({
       homeNumber: ['', [Validators.required]],
       street: ['', [Validators.required]],
@@ -55,26 +61,34 @@ export class CreatePostComponent implements OnInit {
       waterPrice: ['', [Validators.required]],
       otherUtils: ['',]
     }),
-    roomPrice: this.fb.group({
+    roomCost: this.fb.group({
       month: ['', [Validators.required]],
       quarter: ['', [Validators.required]],
       year: ['', [Validators.required]]
     }),
-    roomPostDuration: this.fb.group({
-      week: ['', [Validators.required, Validators.min(1)]],
-      month: ['', [Validators.required]],
-      year: ['', [Validators.required]]
+    postDuration: this.fb.group({
+      week: ['0', [Validators.required, Validators.min(1)]],
+      month: ['0', [Validators.required]],
+      year: ['0', [Validators.required]]
     }),
+    postCost: ['50000'],
     images: ['', [Validators.required, Validators.minLength(3)]]
   })
 
   createPost() {
-    console.log(this.roomModel.value)
+    console.log(this.postModel.value)
     console.log(this.roomImages)
     var form = document.querySelector('form')
     var formData = new FormData(form)
     for (var pair of formData.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
+      console.log(pair);
     }
+  }
+
+  updateCost() {
+    var week = parseInt(this.postModel.get('postDuration.week').value)
+    var month = parseInt(this.postModel.get('postDuration.month').value)
+    var year = parseInt(this.postModel.get('postDuration.year').value)
+    this.postModel.get('postCost').setValue(this.postDurationCost.weekCost*week + this.postDurationCost.monthCost*month + this.postDurationCost.yearCost*year)
   }
 };
