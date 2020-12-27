@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit {
       this.receiver = params.get('username');
       this.accountService.getAccountByQuery(`?username=${this.receiver}`)
         .subscribe(data => {
-          if (data[0].verified == 0) this.router.navigate([`/404`])
+          if (!data[0] || data[0].verified == 0) this.router.navigate([`/404`])
           this.validLoaded = true;
           this.accountType = data[0].accountType;
         })
@@ -110,7 +110,6 @@ export class ProfileComponent implements OnInit {
               this.likedPosts.push((data[0]));
             })
         }
-        console.log(this.likedPosts);
       })
   }
 
