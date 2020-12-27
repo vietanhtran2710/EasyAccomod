@@ -85,7 +85,7 @@ export class PostService {
     return this.http.delete(this.roomUrl + `/${roomID}/image/${fileName}`)
   }
 
-  updatePostAndRoomInfo(postID: number, form: FormData) {
-    return this.http.put(this.postUrl + `/${postID}`, form)
+  updatePostAndRoomInfo(form: FormData) {
+    return this.http.put(this.postUrl + `/form`, form)
   }
 }
