@@ -25,13 +25,16 @@
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h1 class="panel-title">Thông báo</h1>
+                    <h2>Nhấn vào thông báo để xem thông tin chi tiết </h2>
                     </div>
                     <div class="panel-body">
                         <div *ngFor="let noti of notifications">
                             <div *ngIf="noti.type==1">
                                 <div class="alert alert-success">
+                                    <a data-toggle="modal" data-target="#infoModal" (click)="getPostInfo(noti.postID)">
                                     <strong class="default"><i class="fa fa-check"></i></strong> Admin đã phê duyệt bài đăng <strong>{{noti.postName}}</strong> của bạn.
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    </a>
                                 </div>
                             </div>
                             <div *ngIf="noti.type==3">
@@ -48,8 +51,10 @@
                             </div>
                             <div *ngIf="noti.type==4">
                                 <div class="alert alert-success">
+                                    <a data-toggle="modal" data-target="#infoModal" (click)="getPostInfo(noti.postID)">
                                     <strong class="default"><i class="fa fa-check"></i></strong> Admin đã phê duyệt gia hạn bài đăng <strong>{{noti.postName}}</strong> của bạn.
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    </a>
                                 </div>
                             </div>
                             <div *ngIf="noti.type==5">
@@ -66,3 +71,30 @@
 </div>
 
 <app-footer></app-footer>
+
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" 
+    aria-labelledby="infoModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="infoModalLabel">
+                    Thông tin bài đăng 
+                </h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2>Tiêu đề bài đăng</h2>
+                <h1><strong>{{postInfo?.postName}}</strong></h1>
+                <h2>Hạn hiển thị của bài đăng</h2>
+                <h1><strong>{{reformatDate(postInfo?.expiredTime)}}</strong></h1>
+                <h2>Số tiền phải trả</h2>
+                <h1><strong>{{postInfo?.postCost - postInfo?.paidAmount}}</strong></h1>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+		</div>
+	</div>
+</div>
